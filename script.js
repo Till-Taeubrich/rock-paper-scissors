@@ -41,17 +41,22 @@ function playRound () {
 };
 
 function game() {
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0;; i++) {
     playRound();
-    console.log(userPoints + ':' + computerPoints)
+    console.log(userPoints + ':' + computerPoints);
+    if (computerPoints === 5 || userPoints === 5) {
+      chooseWinner();
+      break;
+    }
   }
-  if (computerPoints > userPoints) {
-  alert('You lost the game!')
-} else if (userPoints > computerPoints) {
-  alert('You win the game!')
-} else {
-  'It\'s a tie!'
 }
 
-game()
+function chooseWinner (){
+  if (computerPoints > userPoints) {
+   alert('You lost the game!')
+  } else {
+    alert('You win the game!')
+  }
 }
+
+game();
