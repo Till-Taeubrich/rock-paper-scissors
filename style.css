@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+header {
+  height: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  color: orange;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: monospace;
+  text-transform: uppercase;
+  text-shadow: 0 0 80px red, 0 0 30px;
+}
+
+h1 {
+  margin: 10px;
+}
+
+.grey-area {
+  height: 75%;
+  background-color: rgb(145, 145, 145);
+  font-size: 30px;
+  text-align: center;
+}
+
+button {
+  padding: 10px 50px;
+  margin-right: 60px;
+  margin-left: 60px;
+  background-color: rgb(231, 175, 71);
+  border-style: double;
+  border-color: black;
+}
+
+.grey-area div {
+  color: white;
+  padding-bottom: 40px;
+  font-weight: bold;
+}
+
+#mvm {
+  padding-top: 40px;
+  text-decoration-line: underline;
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+#runningScore {
+  margin: 20px;
+}

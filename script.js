@@ -1,62 +1,89 @@
 let computerPoints = 0;
 let userPoints = 0;
+let userSelection;
+let computerSelection;
 const options = ['rock', 'paper', 'scissors'];
+
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+const display = document.querySelector('#display');
+const runningScore = document.querySelector('#runningScore');
+const winnerAnnouncement = document.querySelector('.buttons');
+const buttons = document.querySelectorAll('.buttons')
+
+// Functions
+
+
+rock.addEventListener('click', function() {
+  playRound('rock');
+})
+
+
+paper.addEventListener('click', function() {
+  playRound('paper');
+})
+
+
+scissors.addEventListener('click', function() {
+  playRound('scissors');
+})
+
 
 function computerPlay(options) {
   let computerChoice = Math.floor(Math.random() * 3);
   return options[computerChoice];
 }
 
-function userPlay() {
-  return prompt('Pick your weapon!', '').toLowerCase();
-}
 
-function playRound () {
+function playRound(userSelection) {
 
-  const userSelection  = userPlay()
-  const computerSelection = computerPlay(options)
+  const computerSelection = computerPlay(options);
  
   if (userSelection === 'rock' && computerSelection === 'scissors'
   || userSelection === 'paper' && computerSelection === 'rock'
   || userSelection === 'scissors' && computerSelection === 'paper') {
-    alert('You Win! ' + userSelection.charAt(0).toUpperCase() + userSelection.slice(1) + ' beats ' + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1));
-    ++userPoints;
-    console.log('User wins');
- 
+    userWins(userSelection, computerSelection);
+
   } else if (userSelection === 'rock' && computerSelection === 'paper'
   || userSelection === 'paper' && computerSelection === 'scissors'
   || userSelection === 'scissors' && computerSelection === 'rock') {
-    alert('You Lose! ' + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1) + ' beats ' + userSelection.charAt(0).toUpperCase() + userSelection.slice(1));
-    ++computerPoints;
-    console.log('Computer wins');
- 
-  } else if (userSelection === computerSelection) {
-    alert('It\'s a tie!');
-    console.log('Tie');
-  }
+    computerWins(userSelection, computerSelection);
   
-  else {
-    alert('Wrong input. Try again.')
+  } else {
+    display.textContent = 'It\'s a tie! Both picked ' + userSelection.charAt(0).toUpperCase() + userSelection.slice(1);
   }
 };
 
-function game() {
-  for (let i = 0;; i++) {
-    playRound();
-    console.log(userPoints + ':' + computerPoints);
-    if (computerPoints === 5 || userPoints === 5) {
-      chooseWinner();
-      break;
-    }
+function userWins(userSelection, computerSelection) {
+  ++userPoints;
+  display.textContent = ('You Win! ' + userSelection.charAt(0).toUpperCase() + userSelection.slice(1) + ' beats ' + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1));
+  updateScore(userPoints, computerPoints);
+  if (userPoints === 5) {
+  chooseWinner();
   }
 }
 
-function chooseWinner (){
+function computerWins(userSelection, computerSelection) {
+  ++computerPoints;
+  display.textContent = ('You Lose! ' + computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1) + ' beats ' + userSelection.charAt(0).toUpperCase() + userSelection.slice(1));
+  updateScore(userPoints, computerPoints);
+  if (computerPoints === 5) {
+  chooseWinner();
+  }
+}
+
+function updateScore(userPoints, computerPoints) {
+  runningScore.textContent = ('🧑🏼 ' + userPoints + ' : ' + computerPoints + ' 🤖️');
+}
+
+function chooseWinner() {
   if (computerPoints > userPoints) {
-   alert('You lost the game!')
+    winnerAnnouncement.textContent = 'You lost the game!';
   } else {
-    alert('You win the game!')
+    winnerAnnouncement.textContent = 'You win the game!';
   }
+  rock.remove();
+  paper.remove();
+  scissors.remove();
 }
-
-game();
